@@ -23,5 +23,5 @@ def download_video():
     # Serve the in-memory file as a response
     return send_file(buffer, as_attachment=True, download_name='video.mp4', mimetype='video/mp4')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
