@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>YouTube downloader</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h1>Video download</h1>
+
+            <form action="/video" name='video' method='post'>
+
+                {% if video is defined %}
+                <video width="320" height="240" controls>
+                    <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
+                </video>
+                {% endif %}
+
+                <input type='text' name='video_url' requiredplaceholder='Enter YouTube video URL'>
+                <button>Download video</button>
+            </form>
+        </div>
+        <hr />
+        <div>
+            <h1 class='text-center'>Playlist download</h1>
+
+            <form action="/playlist" name='playlist' method='post'>
+
+                {% if downloaded_videos is defined %}
+
+                {% for video in downloaded_videos %}
+
+                <video width="320" height="240" controls>
+                    <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
+                </video>
+
+                {% endfor %}
+
+                {% endif %}
+
+                <input type='text' name='playlist_url' required placeholder='Enter playlist URL'>
+                <button>Download playlist</button>
+            </form>
+        </div>
+        <hr />
+        <div>
+            <h1>Channel download</h1>
+
+            <form action="/channel" name='channel' method='post'>
+
+                {% if channel_downloaded_videos is defined %}
+
+                {% for video in channel_downloaded_videos %}
+
+                <video width="320" height="240" controls>
+                    <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
+                </video>
+
+                {% endfor %}
+
+                {% endif %}
+
+                <input type='text' name='channel_url' required placeholder='Enter channel URL'>
+                <button>Download channel</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
