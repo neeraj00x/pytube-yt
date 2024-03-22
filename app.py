@@ -81,7 +81,7 @@ def downloadVideo():
                 def generate():
                     while True:
                         # Read chunk of video data
-                        chunk = buffer.read(3*1024*1024)
+                        chunk = buffer.read(5*1024*1024)
                         if not chunk:
                             break
                         yield chunk
