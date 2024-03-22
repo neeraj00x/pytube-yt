@@ -2,72 +2,52 @@
 <html lang="en">
 
 <head>
-    <title>YouTube downloader</title>
+    <title>YouTube Video Downloader</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 80%;
+        }
+
+        .form-container {
+            background-color: lightgray;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .btn-search {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <div>
-            <h1>Video download</h1>
-
-            <form action="/video" name='video' method='post'>
-
-                {% if video is defined %}
-                <video width="320" height="240" controls>
-                    <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
-                </video>
-                {% endif %}
-
-                <input type='text' name='video_url' requiredplaceholder='Enter YouTube video URL'>
-                <button>Download video</button>
-            </form>
-        </div>
-        <hr />
-        <div>
-            <h1 class='text-center'>Playlist download</h1>
-
-            <form action="/playlist" name='playlist' method='post'>
-
-                {% if downloaded_videos is defined %}
-
-                {% for video in downloaded_videos %}
-
-                <video width="320" height="240" controls>
-                    <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
-                </video>
-
-                {% endfor %}
-
-                {% endif %}
-
-                <input type='text' name='playlist_url' required placeholder='Enter playlist URL'>
-                <button>Download playlist</button>
-            </form>
-        </div>
-        <hr />
-        <div>
-            <h1>Channel download</h1>
-
-            <form action="/channel" name='channel' method='post'>
-
-                {% if channel_downloaded_videos is defined %}
-
-                {% for video in channel_downloaded_videos %}
-
-                <video width="320" height="240" controls>
-                    <source src='{{url_for("static", filename=video["video"]["video_id"]+".mp4")}}' type="video/mp4">
-                </video>
-
-                {% endfor %}
-
-                {% endif %}
-
-                <input type='text' name='channel_url' required placeholder='Enter channel URL'>
-                <button>Download channel</button>
-            </form>
-        </div>
+    <div class="container mt-3">
+        <h2 class="text-center">YouTube Video Downloader</h2>
+        <form action="/" method="post" class="form-container">
+            {% if mesage is defined and mesage %}
+            {% if errorType is defined and errorType %}
+            <div class="alert alert-success text-center">{{ mesage }}</div>
+            {% else %}
+            <div class="alert alert-danger text-center">{{ mesage }}</div>
+            {% endif %}
+            {% endif %}
+            <div class="mb-3 mt-3">
+                <label for="video_url" class="form-label">Enter YouTube Video Url:</label>
+                <input type="text" class="form-control" id="video_url" placeholder="Enter URL" name="video_url">
+            </div>
+            <button type="submit" class="btn btn-primary btn-search">Search Video</button>
+        </form>
     </div>
-
+    <br><br>
 </body>
 
 </html>
